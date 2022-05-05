@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" 
+             xmlns:Binding="clr-namespace:TransportARG2"
+             x:Class="TransportARG2.CrearSolicitud"
+             Title="Crear Solicitud">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout x:Name="formSolicitud"
+                    VerticalOptions="FillAndExpand" 
+                    HorizontalOptions="FillAndExpand" >
+                <Label>NUEVA SOLICITUD DE SERVICIO</Label>
+                
+                <Picker x:Name="pckTiposCamiones"></Picker>
+                <Picker x:Name="pckTiposCargas"></Picker>
+                <Picker x:Name="pckTiposServicios"></Picker>
+                <Label BackgroundColor="Red">Datos del origen de la carga</Label>
+                <Label Text="Ingrese el peso total de su carga (Kg)"/>
+                <Entry x:Name="txtPesoCarga"/>
+                <Label Text="Ingrese Comentarios Adicionales"/>
+                <Editor x:Name="txtComentariosOrigen"/>
+                <Label Text="Inrese la dirección exacta del origen de su carga"/>
+                <Entry x:Name="txtDireccionOrigenCarga"/>
+                <Label x:Name="lblCoodenadasOrigen"/>
+                <Label Text="Ingrese KM desde el origen al destino"/>
+                <Entry x:Name="txtCantidadKilometros"/>
+                <Label Text="Ingrese el Importe total del viaje ($)"/>
+                <Entry x:Name="txtImporteCarga" />
+                <Label BackgroundColor="Blue">Datos del destino de la carga</Label>
+                <Label Text="Ingrese la direccion de destino"/>
+                <Entry x:Name="txtDireccionDestinoCarga"/>
+                <Label x:Name="lblCoodenadasDestino"/>
+                <Label Text="Ingrese el peso a descargar (Kg) (puede ser igual al origen)"/>
+                <Entry x:Name="txtPesoDescarga"/>
+                <Label Text="Ingrese Comentarios Adicionales"/>
+                <Editor x:Name="txtComentariosDescarga"/>
+                
+      
+                <Button x:Name="btnAceptar" Text="Aceptar" Clicked="btnAceptar_Clicked"/>
+                <StackLayout x:Name="mapaSolicitud"></StackLayout>
+            
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
