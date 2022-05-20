@@ -1,10 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" 
              x:Class="TransportARG2.InfoCarga"
              Title="Información de Carga">
     <ContentPage.Content>
-        <StackLayout x:Name="infoCarga">
-        </StackLayout>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="row1" Height="400"/>
+                    <RowDefinition x:Name="row2" Height="Auto"/>
+                    <RowDefinition x:Name="row3" Height="Auto"/>
+                    <RowDefinition x:Name="row4" Height="Auto"/>
+                    <RowDefinition x:Name="row5" Height="Auto"/>
+                    <RowDefinition x:Name="row6" Height="Auto"/>
+                    <RowDefinition x:Name="row7" Height="Auto"/>
+                    <RowDefinition x:Name="row8" Height="Auto"/>
+                    <RowDefinition x:Name="row9" Height="Auto"/>
+                    <RowDefinition x:Name="row10" Height="Auto"/>
+                    <RowDefinition x:Name="row11" Height="Auto"/>
+                    <RowDefinition x:Name="row12" Height="Auto"/>
+                    <RowDefinition x:Name="row13" Height="Auto"/>
+                    <RowDefinition x:Name="row14" Height="Auto"/>
+                    <RowDefinition x:Name="row15" Height="Auto"/>
+                    <RowDefinition x:Name="row16" Height="Auto"/>
+                    <RowDefinition x:Name="row17" Height="Auto"/>
+                    <RowDefinition x:Name="row18" Height="Auto"/>
+                    <RowDefinition x:Name="row19" Height="Auto"/>
+                    <RowDefinition x:Name="row20" Height="Auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="20"></ColumnDefinition>
+                    <ColumnDefinition  Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0" Grid.Row="1" Source="origen_negro.png" VerticalOptions="Center" HorizontalOptions="Center" ></Image>
+                <Image Grid.Column="0" Grid.Row="2" Source="destino_negro.png" VerticalOptions="Center" HorizontalOptions="Center" ></Image>
+
+                <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Text="Origen: ......." x:Name="txtOrigen" TextColor="DarkSlateGray" VerticalOptions="Center"/>
+                <Label Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"  Text="Destino: ......." x:Name="txtDestino" TextColor="DarkSlateGray" VerticalOptions="Center"/>
+
+                <Label Grid.Row="3" Grid.ColumnSpan="3" Text="Tarifa ofrecida (sin IVA):" HorizontalTextAlignment="Center"/>
+                <Label Grid.Row="4" Grid.ColumnSpan="3" Text="......." x:Name="txtImporteCarga" HorizontalTextAlignment="Center" TextColor="Red" FontSize="Medium"/>
+                <Label Grid.Column="1" Grid.Row="5" Text="Distancia" HorizontalTextAlignment="Center" TextColor="Black"/>
+
+                <Label Grid.Column="1" Grid.Row="6" x:Name="txtDistanciaCarga" Text="......." HorizontalTextAlignment="Center" TextColor="DarkSlateGray"/>
+                <Label Grid.Column="2" Grid.Row="5" Text="Tiempo" HorizontalTextAlignment="Center" TextColor="Black"/>
+                <Label Grid.Column="2" Grid.Row="6" x:Name="txtTiempoCarga" Text="......." HorizontalTextAlignment="Center" TextColor="DarkSlateGray"/>
+
+                <BoxView Grid.Row="7" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" HeightRequest="2" Color="LightGray"/>
+                <Label Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="3" Text="INFORMACION DE LA CARGA" HorizontalTextAlignment="Center" />
+                <Label Grid.Column="1" Grid.Row="9" Text="Fecha de la carga" HorizontalTextAlignment="Center" TextColor="Black" />
+                <Label Grid.Column="1" Grid.Row="10" x:Name="txtFechaCarga" Text="......." HorizontalTextAlignment="Center"  TextColor="DarkSlateGray"/>
+
+                <Label Grid.Column="2" Grid.Row="9" Text="Tipo de carga" HorizontalTextAlignment="Center" TextColor="Black" />
+                <Label Grid.Column="2" Grid.Row="10" x:Name="txtTipoCarga" Text="......." HorizontalTextAlignment="Center"  TextColor="DarkSlateGray"/>
+
+                <BoxView Grid.Row="11" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" HeightRequest="2" Color="LightGray"/>
+                <Label Grid.Column="1" Grid.Row="12" Text="Peso total"  HorizontalTextAlignment="Center" TextColor="Black" />
+                <Label Grid.Column="1" Grid.Row="13" x:Name="txtPesoCarga" Text="......." HorizontalTextAlignment="Center"  TextColor="DarkSlateGray"/>
+
+                <Label Grid.Column="2" Grid.Row="12" Text="Tipo de Servicio" HorizontalTextAlignment="Center" TextColor="Black" />
+                <Label Grid.Column="2" Grid.Row="13"  x:Name="txtTipoServicio" Text="......." HorizontalTextAlignment="Center"  TextColor="DarkSlateGray"/>
+
+                <BoxView Grid.Row="14" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" HeightRequest="2" Color="LightGray"/>
+                <Label Grid.Column="0" Grid.Row="15" Grid.ColumnSpan="3" Text="Tipo de camion"  HorizontalTextAlignment="Center" TextColor="Black" />
+                <Label Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="3" x:Name="txtTipoCamion" Text="......."  HorizontalTextAlignment="Center"  TextColor="DarkSlateGray"/>
+
+                <BoxView Grid.Row="17" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" HeightRequest="2" Color="LightGray"/>
+                <Label Grid.Column="0" Grid.Row="18" Grid.ColumnSpan="3" Text="Comentarios adicionales:"  HorizontalTextAlignment="Center" TextColor="Black" />
+                <Label Grid.Column="0" Grid.Row="19" Grid.ColumnSpan="3" x:Name="txtObservacionesOrigen" Text="......."  HorizontalTextAlignment="Center"  TextColor="DarkSlateGray"/>
+
+                <Button Text="Estoy interesado" Grid.Row="20" Grid.ColumnSpan="3" CornerRadius="20"/>
+                <maps:Map Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" x:Name="mapaOrigen" HasScrollEnabled="True">
+
+                </maps:Map>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

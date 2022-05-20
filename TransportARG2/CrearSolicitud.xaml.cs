@@ -19,13 +19,14 @@ namespace TransportARG2
         public CrearSolicitud()
         {
             InitializeComponent();
+            if (string.IsNullOrEmpty(UsuarioConectado.usuarioNombre))
+            {                
+                App.Current.MainPage=new loginPage("CrearSolicitud");             
+                return;
+            }
             cargarTiposCamiones();
             cargarTiposCargas();
-            cargarTiposServicios();
-            
-            
-
-
+            cargarTiposServicios();                        
         }
 
         private void cargarTiposServicios()
@@ -109,7 +110,7 @@ namespace TransportARG2
             conectarMysql conectar = new conectarMysql("kiremoto", "mecago");
             if (conectar.IntentarConectar(out error))
             {
-                string consulta = "SELECT id, concat(familia,' - ',sub_familia) as tipo FROM camiones_tipos";
+                string consulta = "SELECT id, concat(familia,' - ',sub_familia) as tipo FROM camiones_tipos order by familia desc, sub_familia asc";
                 MySqlConnection conexionMysql = new MySqlConnection(conectar.builder.ToString());
                 conexionMysql.Open();
 
@@ -175,6 +176,7 @@ namespace TransportARG2
 
                 IEnumerable<Position> posicionOrigen = await geoCoder.GetPositionsForAddressAsync(txtDireccionOrigenCarga.Text);
                 IEnumerable<Position> posicionDestino = await geoCoder.GetPositionsForAddressAsync(txtDireccionDestinoCarga.Text);
+                
                 Position DestinoCarga = posicionDestino.FirstOrDefault();
                 Position OrigenCarga = posicionOrigen.FirstOrDefault();
 
@@ -202,11 +204,40 @@ namespace TransportARG2
                 string provincia_destino = DireccionDestino[2];
                 string comentarios_origen = txtComentariosOrigen.Text;
                 string comentarios_destino = txtComentariosDescarga.Text;
+                string direccionOrigenDeclarada = txtDireccionOrigenCarga.Text;
+                string direccionDestinoDeclarada = txtDireccionDestinoCarga.Text;
+
+                DateTime fechaOrigen = dtpckFechaOrigen.Date;
+                DateTime fechaDestino = dtpckFechaDestino.Date;
 
                 double peso_carga = double.Parse(txtPesoCarga.Text);
                 double distancia_carga = double.Parse(txtCantidadKilometros.Text);
                 double importe_carga = double.Parse(txtImporteCarga.Text);
-                double peso_descarga = double.Parse(txtPesoDescarga.Text);
+                //double peso_descarga = double.Parse(txtPesoDescarga.Text);
+
+                if (peso_carga < 5000)
+                {
+                    await DisplayAlert("Error", "El peso minimo a transportar es de 5000 Kg", "OK");
+                    return;
+                }
+
+                if (distancia_carga==0)
+                {
+                    await DisplayAlert("Error", "La distancia no puede ser cero", "OK");
+                    return;
+                } 
+
+                if (importe_carga == 0)
+                {
+                    await DisplayAlert("Error", "El importe de la carga no puede ser cero", "OK");
+                    return;
+                }
+
+                if(CoordenadasOrigen=="" || CoordenadasDestino == "")
+                {
+                    await DisplayAlert("Error", "La direccion especificada no es correcta, no se pueden obtener coordenadas", "OK");
+                    return;
+                }
 
 
 
@@ -218,9 +249,11 @@ namespace TransportARG2
 
                     string consulta = "INSERT INTO servicio_solicitud_origen " +
                         "(camion_tipo_id,servicio_tipo_id,carga_tipo_id,origen_provincia_id,origen_ciudad_id,origen_direccion," +
-                        "origen_coordenadas,origen_comentarios,carga_peso,carga_importe,carga_distancia)" +
+                        "origen_coordenadas,origen_comentarios,carga_peso,carga_importe,carga_distancia,origen_direccionDeclarada, " +
+                        "fecha)" +
                         "values(?tipoCamion,?tipoServicio,?tipoCarga,?Provincia,?Ciudad,?DireccionOrigen," +
-                        "?CoordenadasOrigen,?ComentariosOrigen,?PesoCarga,?ImporteCarga,?DistanciaCarga)";
+                        "?CoordenadasOrigen,?ComentariosOrigen,?PesoCarga,?ImporteCarga,?DistanciaCarga,?direccionOrigenDeclarada," +
+                        "?fecha)";
                     MySqlConnection conexionMysql = new MySqlConnection(conectar.builder.ToString());
                     conexionMysql.Open();
 
@@ -237,6 +270,8 @@ namespace TransportARG2
                     guardarDatosOrigen.Parameters.AddWithValue("?PesoCarga", peso_carga);
                     guardarDatosOrigen.Parameters.AddWithValue("?ImporteCarga", importe_carga);
                     guardarDatosOrigen.Parameters.AddWithValue("?DistanciaCarga", distancia_carga);
+                    guardarDatosOrigen.Parameters.AddWithValue("?direccionOrigenDeclarada", direccionOrigenDeclarada);
+                    guardarDatosOrigen.Parameters.AddWithValue("?fecha", fechaOrigen);
 
                     await guardarDatosOrigen.ExecuteNonQueryAsync();
                     IDCargaOrigen = int.Parse(guardarDatosOrigen.LastInsertedId.ToString());
@@ -247,9 +282,9 @@ namespace TransportARG2
                 {
                     string consulta = "INSERT INTO servicio_solicitud_destino(" +
                         "servicio_solicitud_id, destino_provincia_id, destino_ciudad_id, destino_direccion," +
-                        "destino_coordenadas, destino_comentarios, descarga_peso) " +
+                        "destino_coordenadas, destino_comentarios,destino_direccionDeclarada,fecha) " +
                         "values(?IDSolicitudOrigen,?Provincia,?Ciudad,?DireccionDestino,?Coordenadas,?Comentarios," +
-                        "?DescargaPeso)";
+                        "?direccionDestinoDeclarada,?fecha)";
                     MySqlConnection conexionMysql = new MySqlConnection(conectar.builder.ToString());
                     conexionMysql.Open();
 
@@ -261,12 +296,18 @@ namespace TransportARG2
                     guardarDatosDestino.Parameters.AddWithValue("?DireccionDestino", dir_destino);
                     guardarDatosDestino.Parameters.AddWithValue("?Coordenadas", CoordenadasDestino);
                     guardarDatosDestino.Parameters.AddWithValue("?Comentarios", comentarios_destino);
-                    guardarDatosDestino.Parameters.AddWithValue("?DescargaPeso", peso_descarga);
+                    guardarDatosDestino.Parameters.AddWithValue("?direccionDestinoDeclarada", direccionDestinoDeclarada);
+                    guardarDatosDestino.Parameters.AddWithValue("?fecha", fechaDestino);
 
                     await guardarDatosDestino.ExecuteNonQueryAsync();                    
                     conexionMysql.Close();
                 }
                 await DisplayAlert("Mensaje", "La solicitud se ingreso correctamente", "OK");
+                //var pin = (Pin)sender;
+                await Navigation.PushAsync(new InfoCarga(IDCargaOrigen));
+                ///con esto limpiamos la informacion anterior
+                lblCoodenadasOrigen.Text = "";
+                lblCoodenadasDestino.Text = "";
                 foreach(var control in formSolicitud.Children)
                 {
                     Type objeto = control.GetType();
@@ -291,20 +332,7 @@ namespace TransportARG2
             {
                 await DisplayAlert("ERROR", ex.Message, "OK");
             }
-        }
-
-        private void pckTiposCamiones_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //var picker = (Picker)sender;
-            //int selectedIndex = picker.SelectedIndex;
-            //tiposCamiones camionSel = (tiposCamiones)picker.ItemsSource[selectedIndex];
-
-            //DisplayAlert("mm",camionSel.id.ToString() ,"ok");
-        }
-        //async void CalcularCoordenadas(string direccion)
-        //{
-        //    IEnumerable<Position> posicionOrigen = await geoCoder.GetPositionsForAddressAsync(txtDireccionOrigenCarga.Text);
-        //}
+        }      
     }
     
 }

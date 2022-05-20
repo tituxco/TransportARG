@@ -16,6 +16,8 @@
                 <Picker x:Name="pckTiposCargas"></Picker>
                 <Picker x:Name="pckTiposServicios"></Picker>
                 <Label BackgroundColor="Red">Datos del origen de la carga</Label>
+                <Label Text="Fecha aproximada para retirar"/>
+                <DatePicker x:Name="dtpckFechaOrigen"/>
                 <Label Text="Ingrese el peso total de su carga (Kg)"/>
                 <Entry x:Name="txtPesoCarga"/>
                 <Label Text="Ingrese Comentarios Adicionales"/>
@@ -28,15 +30,13 @@
                 <Label Text="Ingrese el Importe total del viaje ($)"/>
                 <Entry x:Name="txtImporteCarga" />
                 <Label BackgroundColor="Blue">Datos del destino de la carga</Label>
+                <Label Text="Fecha aproximada para entregar"/>
+                <DatePicker x:Name="dtpckFechaDestino"/>
                 <Label Text="Ingrese la direccion de destino"/>
                 <Entry x:Name="txtDireccionDestinoCarga"/>
                 <Label x:Name="lblCoodenadasDestino"/>
-                <Label Text="Ingrese el peso a descargar (Kg) (puede ser igual al origen)"/>
-                <Entry x:Name="txtPesoDescarga"/>
                 <Label Text="Ingrese Comentarios Adicionales"/>
                 <Editor x:Name="txtComentariosDescarga"/>
-                
-      
                 <Button x:Name="btnAceptar" Text="Aceptar" Clicked="btnAceptar_Clicked"/>
                 <StackLayout x:Name="mapaSolicitud"></StackLayout>
             

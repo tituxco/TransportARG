@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+            
+             x:Class="TransportARG2.loginPage"
+             x:Name="iniciarSesion"
+             Title="Iniciar Sesion">
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="White">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Row="0" Grid.ColumnSpan="2" Source="logo2_big.png"/>
+                <Label Grid.Row="1" Grid.ColumnSpan="2" Text="Ingrese sus datos para continuar" HorizontalTextAlignment="Center" FontSize="Large"/>
+                <Entry Grid.Row="2" Grid.ColumnSpan="2"  Placeholder="Usuario" x:Name="txtUsuario"/>
+                <Entry Grid.Row="3" Grid.ColumnSpan="2" Placeholder="Contraseña" x:Name="txtPassword" IsPassword="True"/>
+                <Button Grid.Row="4" Grid.ColumnSpan="2" Text="Ingresar" x:Name="btnIngresar" Clicked="btnIngresar_Clicked"  CornerRadius="20"/>
+                <Label Grid.Row="5" Grid.ColumnSpan="2" Text="ó" FontSize="Large" HorizontalTextAlignment="Center"/>
+                <Button Grid.Row="6" Grid.Column="0" Text="Registrarme" BackgroundColor="OrangeRed" x:Name="btnRegistrarme" Clicked="btnRegistrarme_Clicked"  CornerRadius="20"/>
+                <Button Grid.Row="6" Grid.Column="1" Text="Olvide mis datos" BackgroundColor="OrangeRed" x:Name="btnOlvide" Clicked="btnOlvide_Clicked"  CornerRadius="20"/>
+
+
+
+                <Grid Grid.Row="7" Grid.RowSpan="1"  Opacity=".8" BackgroundColor="Black" IsVisible="false">
+                    <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" Color="White" 
+                                      IsRunning="{Binding IsBusy}" x:Name="IndicadorActividad"></ActivityIndicator>
+                </Grid>
+            </Grid>
+            
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

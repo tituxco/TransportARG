@@ -4,12 +4,19 @@ using System.Text;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 
-namespace TransportARG
+namespace TransportARG2
 {
     public class variablesGlobales
     {
-        public static Position posicionOrigen;
-        public static Position posicionDestino;
-        public static string cadenaConexion = "server=66.98.35.86; port=3306; userid=kiremoto; password=mecago; database=cloud_transportARG;";
+        public int UsuarioAutorizado = 1;
     }
+    public class UsuarioConectado
+    {
+        public static string tipoUsuario { get; set; }
+        public static string usuarioNombre { get; set; }
+        public static string usuarioPermisos { get; set; }
+
+
+    }
+
 }

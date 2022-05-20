@@ -5,8 +5,54 @@
              x:Class="TransportARG2.BuscarCargas"
              Title="Cargas cercanas">
     <ContentPage.Content>
-        <StackLayout x:Name="mapaInicial">
+
+        <ScrollView>
             
-        </StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="mapa" Height="200"/>
+                    <RowDefinition x:Name="items" Height="100"/>
+                    <RowDefinition x:Name="boton" Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="2" x:Name="btnBuscarCargas" Text="Buscar cargas" Clicked="btnBuscarCargas_Click"/>
+                <maps:Map x:Name="mapaCargas" Grid.Row="0" HasScrollEnabled="True" HasZoomEnabled="True" />
+                <ListView x:Name="listaCargas" Grid.Row="1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition x:Name="row2" Height="Auto"/>
+                                    <RowDefinition x:Name="row3" Height="Auto"/>
+                                    <RowDefinition x:Name="row4" Height="Auto"/>
+                                    <RowDefinition x:Name="row5" Height="Auto"/>
+                                    <RowDefinition x:Name="row6" Height="Auto"/>
+                                    <RowDefinition x:Name="row7" Height="Auto"/>
+                                    <RowDefinition x:Name="row8" Height="Auto"/>
+                                    <RowDefinition x:Name="row9" Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding origenCarga}" />
+                                <Label Grid.Row="2" Grid.Column="0" Text="{Binding destinoCarga}"/>
+                                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3" Text="{Binding montoCarga}" TextColor="DarkRed" HorizontalTextAlignment="End" VerticalTextAlignment="Center" FontSize="Large" />
+                                <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding fechaCarga}"/>
+                                <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding tipoServicio}"/>
+                                <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding tipoCamion}"/>
+                                <BoxView Grid.Row="6" Grid.ColumnSpan="4" HorizontalOptions="FillAndExpand" HeightRequest="2" Color="LightGray"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+                
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

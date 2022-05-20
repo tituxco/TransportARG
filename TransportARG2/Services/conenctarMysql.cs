@@ -32,7 +32,20 @@ namespace TransportARG2.Services
             }catch(Exception ex){
                 Error = ex.Message;
                 return false;
-            }
+            }            
         }
+        //public bool LoginUsuario(out string error)
+        //{
+        //    try
+        //    {
+
+
+        //    }catch (Exception ex)
+        //    {
+        //        error = ex.Message;
+        //        return false;
+        //    }
+
+        //}
     }
 }

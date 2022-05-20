@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "398816846158",
+    "project_id": "api-7577648058376779698-804019",
+    "storage_bucket": "api-7577648058376779698-804019.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398816846158:android:c2a1aaaf61fc1cbb7abe1f",
+        "android_client_info": {
+          "package_name": "com.kibitinformatica.transportarg2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398816846158-voi89498g828t6am3jpc6sfa8hr4oe2o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKHOKbV3S5r6GCn_fWV2jLGKVIb1cvVnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398816846158-voi89498g828t6am3jpc6sfa8hr4oe2o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
